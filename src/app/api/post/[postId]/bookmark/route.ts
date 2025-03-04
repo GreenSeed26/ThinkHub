@@ -4,7 +4,7 @@ import { prisma } from "@/lib/db";
 interface AsyncParams {
   params: Promise<{ postId: string }>;
 }
-export async function POST(res: Response, { params }: AsyncParams) {
+export async function POST(req: Request, { params }: AsyncParams) {
   const { postId } = await params;
   try {
     const { user: loggedInUser } = await validateRequest();
