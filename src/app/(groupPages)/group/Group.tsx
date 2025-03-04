@@ -2,15 +2,12 @@
 import GroupAvatar from "@/components/groups/GroupAvatar";
 import { GroupData } from "@/lib/types";
 import { formatNumber } from "@/lib/utils";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 interface GroupParams {
   group: GroupData;
 }
 export default function Group({ group }: GroupParams) {
-  const { data: session } = useSession();
-  const user = session?.user;
   return (
     <article className="w-full space-y-3 rounded-2xl border bg-card p-5 shadow-sm">
       <div className="flex justify-between gap-3">

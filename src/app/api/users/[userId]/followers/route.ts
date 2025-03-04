@@ -1,7 +1,6 @@
 import { validateRequest } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { FollowInfo } from "@/lib/types";
-import { error } from "console";
 
 interface AsyncParams {
   params: Promise<{ userId: string }>;

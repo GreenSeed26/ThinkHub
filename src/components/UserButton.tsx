@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import UserAvatar from "./UserAvatar";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { LogOutIcon, Moon, Settings, Sun, User2 } from "lucide-react";

@@ -38,6 +38,7 @@ function SignUp() {
     startTransition(async () => {
       const { error } = await signUp(values);
       if (error) {
+        setError(error);
         toast({
           description: error,
           variant: "destructive",
@@ -49,6 +50,7 @@ function SignUp() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+        {error && <p className="text-center text-destructive">{error}</p>}
         <FormField
           control={form.control}
           name="username"

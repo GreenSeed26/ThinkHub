@@ -28,6 +28,8 @@ interface PageProp {
 }
 
 export default async function Friends({ params }: PageProp) {
+  const { username } = await params;
+
   const { user } = await validateRequest();
 
   if (!user) return <p>Unauthorized</p>;
@@ -35,6 +37,7 @@ export default async function Friends({ params }: PageProp) {
 
   return (
     <div className="mx-auto max-w-7xl">
+      <h1>{username}</h1>
       {friends.followers.map(({ follower }) => follower.username)}
     </div>
   );
