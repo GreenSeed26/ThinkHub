@@ -15,8 +15,6 @@ type ToasterToast = ToastProps & {
   action?: ToastActionElement;
 };
 
-const actionTypes = {} as const;
-
 let count = 0;
 
 function genId() {
