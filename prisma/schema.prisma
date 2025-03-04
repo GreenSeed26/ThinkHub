@@ -75,14 +75,15 @@ model VerificationToken {
 }
 
 model Post {
-  id       String     @id @default(cuid())
-  content  String
-  userId   String
-  user     User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  likes    Like[]
-  bookmark Bookmark[]
-  groupId  String?
-  group    Group?     @relation(fields: [groupId], references: [id])
+  id          String     @id @default(cuid())
+  content     String
+  userId      String
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  likes       Like[]
+  bookmark    Bookmark[]
+  attachments Media[]
+  groupId     String?
+  group       Group?     @relation(fields: [groupId], references: [id])
 
   createdAt DateTime @default(now())
 
@@ -120,6 +121,23 @@ model Like {
 
   @@unique([userId, postId])
   @@map("likes")
+}
+
+model Media {
+  id     String    @id @default(cuid())
+  postId String?
+  post   Post?     @relation(fields: [postId], references: [id], onDelete: SetNull)
+  type   MediaType
+  url    String
+
+  createdAt DateTime @default(now())
+
+  @@map("post_media")
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
 }
 
 model Group {

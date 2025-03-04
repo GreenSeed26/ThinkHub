@@ -48,6 +48,7 @@ export function getPostDataInclude(loggedInUserId: string) {
         userId: true,
       },
     },
+    attachments: true,
     bookmark: {
       where: {
         userId: loggedInUserId,

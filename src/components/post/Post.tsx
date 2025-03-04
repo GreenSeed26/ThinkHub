@@ -1,7 +1,7 @@
 "use client";
 import { PostData } from "@/lib/types";
 import UserAvatar from "../UserAvatar";
-import { relativeDateFormat } from "@/lib/utils";
+import { cn, relativeDateFormat } from "@/lib/utils";
 import { Separator } from "@radix-ui/react-separator";
 import LikeButton from "./LikeButton";
 import { useSession } from "next-auth/react";
@@ -9,6 +9,8 @@ import { Bookmark, MessageCircle, Triangle } from "lucide-react";
 import BookmarkButton from "./BookmarkButton";
 import Link from "next/link";
 import GroupAvatar from "../groups/GroupAvatar";
+import Image from "next/image";
+import { Media } from "@prisma/client";
 
 interface PostProps {
   post: PostData;
@@ -80,6 +82,9 @@ export default function Post({ post }: PostProps) {
         </div>
       </div>
       <div className="whitespace-pre-wrap">{post.content}</div>
+      {!!post.attachments.length && (
+        <MediaPreviews attachments={post.attachments} />
+      )}
       <Separator />
       <div className="flex justify-around">
         <LikeButton
@@ -103,4 +108,55 @@ export default function Post({ post }: PostProps) {
       </div>
     </article>
   );
+}
+
+interface MediaPreviewsProps {
+  attachments: Media[];
+}
+
+function MediaPreviews({ attachments }: MediaPreviewsProps) {
+  return (
+    <div
+      className={cn(
+        "flex flex-col gap-3",
+        attachments.length > 1 && "sm:grid sm:grid-cols-2",
+      )}
+    >
+      {attachments.map((m) => (
+        <MediaPreview key={m.id} media={m} />
+      ))}
+    </div>
+  );
+}
+
+interface MediaPreviewProps {
+  media: Media;
+}
+
+function MediaPreview({ media }: MediaPreviewProps) {
+  if (media.type === "IMAGE") {
+    return (
+      <Image
+        src={media.url}
+        alt="Attachment"
+        width={500}
+        height={500}
+        className="mx-auto size-fit max-h-[30rem] rounded-2xl"
+      />
+    );
+  }
+
+  if (media.type === "VIDEO") {
+    return (
+      <div>
+        <video
+          src={media.url}
+          controls
+          className="mx-auto size-fit max-h-[30rem] rounded-2xl"
+        />
+      </div>
+    );
+  }
+
+  return <p className="text-destructive">Unsupported media type</p>;
 }
