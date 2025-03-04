@@ -1,8 +1,13 @@
 {
-    "crons": [
-        {
-            "path": "api/clear-uploads",
-            "schedule": "0 2 * * *"
-        }
-    ]
+  "git": {
+    "deploymentEnabled": {
+      "dev": false
+    }
+  },
+  "crons": [
+    {
+      "path": "api/clear-uploads",
+      "schedule": "0 2 * * *"
+    }
+  ]
 }
