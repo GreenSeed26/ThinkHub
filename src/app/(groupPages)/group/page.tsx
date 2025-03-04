@@ -1,10 +1,7 @@
 import React, { cache } from "react";
 import GroupList from "./GroupList";
-import RightSidebar from "@/components/RightSidebar";
-import CreateGroup from "./create/CreateGroup";
 import SideBar from "./SideBar";
 import { prisma } from "@/lib/db";
-import { notFound } from "next/navigation";
 import { validateRequest } from "@/lib/auth";
 import { getGroupDataInclude } from "@/lib/types";
 

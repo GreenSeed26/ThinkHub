@@ -16,7 +16,6 @@ import { PasswordInput } from "@/components/PasswordInput";
 import LoadingButton from "@/components/LoadingButton";
 import { useState, useTransition } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { signIn } from "@/lib/auth";
 import { signUp } from "./action";
 
 function SignUp() {

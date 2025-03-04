@@ -1,7 +1,6 @@
 import { validateRequest } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { LikeInfo } from "@/lib/types";
-import { error } from "console";
 
 interface AsyncParam {
   params: Promise<{ postId: string }>;

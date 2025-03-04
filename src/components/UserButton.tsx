@@ -23,7 +23,7 @@ interface UserButtonProps {
 }
 
 export default function UserButton({ className, user }: UserButtonProps) {
-  const { themes, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
 
   const queryClient = useQueryClient();
   return (
@@ -57,7 +57,7 @@ export default function UserButton({ className, user }: UserButtonProps) {
         <Link href="/settings/accessibility">
           <DropdownMenuItem>
             <div className="mr-2 rounded-full bg-card p-2">
-              <Moon />
+              {theme === "dark" ? <Moon /> : <Sun />}
             </div>
             Display & Accessibility
           </DropdownMenuItem>

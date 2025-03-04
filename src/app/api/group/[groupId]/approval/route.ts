@@ -1,6 +1,6 @@
 import { validateRequest } from "@/lib/auth";
 import { prisma } from "@/lib/db";
-import { ApprovalInfo, getUserDataSelect } from "@/lib/types";
+import { ApprovalInfo } from "@/lib/types";
 
 interface AsyncParam {
   params: Promise<{ groupId: string }>;

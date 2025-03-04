@@ -1,7 +1,6 @@
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { getPostDataInclude, PostPage } from "@/lib/types";
-import { error } from "console";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {

@@ -11,7 +11,6 @@ export default function CreateGroup() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [privacy, setPrivacy] = useState<"PUBLIC" | "PRIVATE">("PUBLIC");
-  const [requiresApproval, setRequiresApproval] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   async function handleSubmit(e: React.FormEvent) {
@@ -21,7 +20,6 @@ export default function CreateGroup() {
         name,
         description,
         privacy,
-        requiresApproval,
       });
 
       if (error) {
@@ -72,14 +70,7 @@ export default function CreateGroup() {
         </select>
       </div>
 
-      {/* Requires Approval Checkbox */}
-      {/* <div className="flex items-center space-x-2">
-        <Checkbox
-          checked={requiresApproval}
-          onCheckedChange={(checked) => setRequiresApproval(checked)}
-        />
-        <label className="text-sm font-medium">Requires Approval</label>
-      </div> */}
+      {/*TODO: requires approval */}
 
       <LoadingButton loading={isPending} type="submit" className="w-full">
         Create

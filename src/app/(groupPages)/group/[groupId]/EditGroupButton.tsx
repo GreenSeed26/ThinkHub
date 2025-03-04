@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { GroupData, UserData } from "@/lib/types";
+import { GroupData } from "@/lib/types";
 import { useState } from "react";
 import { Pencil } from "lucide-react";
 import EditGroupProfileDialog from "./EditGroupProfileDialog";

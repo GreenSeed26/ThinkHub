@@ -5,7 +5,7 @@ import { cn, relativeDateFormat } from "@/lib/utils";
 import { Separator } from "@radix-ui/react-separator";
 import LikeButton from "./LikeButton";
 import { useSession } from "next-auth/react";
-import { Bookmark, MessageCircle, Triangle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import BookmarkButton from "./BookmarkButton";
 import Link from "next/link";
 import GroupAvatar from "../groups/GroupAvatar";

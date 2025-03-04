@@ -28,8 +28,6 @@ interface PageProp {
 }
 
 export default async function Friends({ params }: PageProp) {
-  const { username } = await params;
-
   const { user } = await validateRequest();
 
   if (!user) return <p>Unauthorized</p>;

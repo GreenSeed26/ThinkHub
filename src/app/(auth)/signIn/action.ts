@@ -2,11 +2,9 @@
 
 import { prisma } from "@/lib/db";
 import { loginSchema, LoginValues } from "@/lib/validation";
-import { verify } from "@node-rs/argon2";
 import { redirect } from "next/navigation";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { signIn } from "@/lib/auth";
-import { compare } from "bcrypt-ts";
 
 export async function login(
   credentials: LoginValues,

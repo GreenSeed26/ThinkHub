@@ -1,6 +1,6 @@
 "use client";
 import kyInstance from "@/lib/ky";
-import { JoinRequestData, RequestInfo } from "@/lib/types";
+import { RequestInfo } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import React from "react";

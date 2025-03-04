@@ -1,12 +1,6 @@
 "use client";
-import {
-  QueryKey,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { QueryKey, useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import { joinGroup } from "./action";
 import { Button } from "../ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { useGroupInfo } from "./useGroupInfo";

@@ -1,6 +1,6 @@
 "use client";
 import { loginSchema, LoginValues } from "@/lib/validation";
-import React, { useState, useTransition } from "react";
+import React, { useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -15,7 +15,6 @@ import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/PasswordInput";
 import LoadingButton from "@/components/LoadingButton";
 import { useToast } from "@/hooks/use-toast";
-import { signIn } from "next-auth/react";
 import { login } from "./action";
 
 function LoginForm() {

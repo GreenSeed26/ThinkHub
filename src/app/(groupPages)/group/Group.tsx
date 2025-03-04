@@ -1,6 +1,5 @@
 "use client";
 import GroupAvatar from "@/components/groups/GroupAvatar";
-import JoinButton from "@/components/groups/JoinButton";
 import { GroupData } from "@/lib/types";
 import { formatNumber } from "@/lib/utils";
 import { useSession } from "next-auth/react";

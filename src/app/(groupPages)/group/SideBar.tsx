@@ -60,7 +60,7 @@ export default function SideBar({ groups, className }: SideBarProps) {
       <Separator />
 
       <div className="space-y-3">
-        <h1>Groups you've joined</h1>
+        <h1>Groups you&apos;ve joined</h1>
         {groups.map((group) => (
           <div key={group.id} className="flex lg:gap-2">
             <GroupAvatar
@@ -81,7 +81,7 @@ export default function SideBar({ groups, className }: SideBarProps) {
         ))}
         {!groups.length && (
           <p className="text-sm text-muted-foreground">
-            You don't have any groups yet. Join A group or create one
+            You don&apos;t have any groups yet. Join A group or create one
           </p>
         )}
       </div>

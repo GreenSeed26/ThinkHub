@@ -7,7 +7,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { updateProfile } from "./action";
-import { PostPage, UserData } from "@/lib/types";
+import { PostPage } from "@/lib/types";
 import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
 

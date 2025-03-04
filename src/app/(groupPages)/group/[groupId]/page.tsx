@@ -11,7 +11,6 @@ import { formatNumber } from "@/lib/utils";
 import { Check, Globe2, Lock, UserPlus } from "lucide-react";
 import GroupPost from "./GroupPost";
 import { Button } from "@/components/ui/button";
-import UpdateImage from "./EditGroupProfileDialog";
 import EditGroupButton from "./EditGroupButton";
 import { JoinRequestButton } from "@/components/groups/request/JoinButton";
 import UserAvatar from "@/components/UserAvatar";

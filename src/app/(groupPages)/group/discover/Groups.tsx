@@ -6,12 +6,9 @@ import { DiscoverGroupPage } from "@/lib/types";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function Groups() {
-  const router = useRouter();
-
   const { data, status, isFetching, hasNextPage, fetchNextPage } =
     useInfiniteQuery({
       queryKey: ["discover-groups"],

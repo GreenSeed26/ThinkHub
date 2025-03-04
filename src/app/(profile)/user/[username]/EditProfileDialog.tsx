@@ -30,7 +30,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useSession } from "next-auth/react";
 
 interface EditProfileDialogProps {
   user: UserData;
@@ -43,8 +42,6 @@ export default function EditProfileDialog({
   open,
   user,
 }: EditProfileDialogProps) {
-  const { update: updateSession } = useSession();
-
   const form = useForm<UpdateProfileValues>({
     resolver: zodResolver(updateProfileSchema),
     defaultValues: {

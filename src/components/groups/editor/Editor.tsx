@@ -8,8 +8,6 @@ import "./style.css";
 import LoadingButton from "@/components/LoadingButton";
 import UserAvatar from "@/components/UserAvatar";
 import { useSession } from "next-auth/react";
-import { UserData } from "@/lib/types";
-import { UploadButton } from "@/lib/uploadthing";
 import { useGroupPostSubmit } from "./mutation";
 
 export default function Editor({ groupId }: { groupId: string }) {

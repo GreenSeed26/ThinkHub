@@ -1,6 +1,5 @@
 "use client";
 
-import { Button, ButtonProps } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";

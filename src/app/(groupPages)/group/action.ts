@@ -1,6 +1,6 @@
 "use server";
 
-import { auth, validateRequest } from "@/lib/auth";
+import { validateRequest } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { createGroupSchema } from "@/lib/validation";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
@@ -10,7 +10,6 @@ export async function createGroup(input: {
   name: string;
   description: string;
   privacy: "PUBLIC" | "PRIVATE";
-  requiresApproval: boolean;
 }): Promise<{ error: string }> {
   try {
     const { user } = await validateRequest();

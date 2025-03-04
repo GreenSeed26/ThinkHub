@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { UserData } from "@/lib/types";
-import { convertToLocaleString, delay } from "@/lib/utils";
+import { convertToLocaleString } from "@/lib/utils";
 import { LucideClock } from "lucide-react";
 import { SetStateAction, useState, useTransition } from "react";
 import { Textarea } from "@/components/ui/textarea";

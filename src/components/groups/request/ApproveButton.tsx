@@ -1,15 +1,12 @@
 "use client";
-import LoadingButton from "@/components/LoadingButton";
 import kyInstance from "@/lib/ky";
-import { ApprovalInfo, GroupData } from "@/lib/types";
-import { JoinRequest } from "@prisma/client";
+import { ApprovalInfo } from "@/lib/types";
 import { QueryKey, useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { useToast } from "@/hooks/use-toast";
 import useApproveInfo from "./useApproveInfo";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
 
 export default function ApproveButton({
   requestUserId,

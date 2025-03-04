@@ -2,14 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import kyInstance from "@/lib/ky";
-import { JoinInfo, RequestInfo } from "@/lib/types";
-import { cn } from "@/lib/utils";
-import {
-  QueryKey,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { cancelJoinRequest, sendJoinRequest } from "./actions";
 
