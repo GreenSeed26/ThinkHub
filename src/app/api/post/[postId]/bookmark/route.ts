@@ -33,7 +33,7 @@ export async function POST(req: Request, { params }: AsyncParams) {
   }
 }
 
-export async function DELETE(res: Response, { params }: AsyncParams) {
+export async function DELETE(req: Request, { params }: AsyncParams) {
   const { postId } = await params;
 
   try {
