@@ -1,9 +1,5 @@
 {
-  "git": {
-    "deploymentEnabled": {
-      "dev": false
-    }
-  },
+  "devCommand": "next dev",
   "crons": [
     {
       "path": "api/clear-uploads",
