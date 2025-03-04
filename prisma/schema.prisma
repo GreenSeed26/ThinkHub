@@ -1,0 +1,190 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearchPostgres"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  displayName   String?
+  username      String?
+  email         String    @unique
+  password      String
+  bio           String?
+  image         String?
+  banner        String?
+  emailVerified DateTime?
+  accounts      Account[]
+  sessions      Session[]
+
+  posts       Post[]
+  likes       Like[]
+  joinRequest JoinRequest[]
+  followers   Follow[]      @relation("Followers")
+  following   Follow[]      @relation("Following")
+  bookmark    Bookmark[]
+  group       GroupMember[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+model Post {
+  id       String     @id @default(cuid())
+  content  String
+  userId   String
+  user     User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  likes    Like[]
+  bookmark Bookmark[]
+  groupId  String?
+  group    Group?     @relation(fields: [groupId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@map("posts")
+}
+
+model Bookmark {
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+
+  bookmarkedAt DateTime @default(now())
+
+  @@unique([postId, userId])
+  @@map("bookmark")
+}
+
+model Follow {
+  followerId  String
+  follower    User   @relation("Following", fields: [followerId], references: [id], onDelete: Cascade)
+  followingId String
+  following   User   @relation("Followers", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@unique([followerId, followingId])
+  @@map("follows")
+}
+
+model Like {
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  postId String
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, postId])
+  @@map("likes")
+}
+
+model Group {
+  id               String        @id @default(cuid())
+  name             String        @unique
+  description      String?
+  image            String?
+  privacy          Privacy       @default(PUBLIC)
+  requiresApproval Boolean       @default(false) // If true, posts need admin approval
+  members          GroupMember[]
+  posts            Post[]
+  joinRequests     JoinRequest[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("group")
+}
+
+model GroupMember {
+  id      String @id @default(cuid())
+  userId  String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  groupId String
+  group   Group  @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  role    Role   @default(MEMBER)
+
+  joinedAt DateTime @default(now())
+
+  @@unique([userId, groupId])
+  @@map("group_members")
+}
+
+model JoinRequest {
+  id      String        @id @default(cuid())
+  userId  String
+  user    User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  groupId String
+  group   Group         @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  status  RequestStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, groupId])
+  @@map("join_requests")
+}
+
+enum Role {
+  ADMIN
+  MEMBER
+}
+
+enum Privacy {
+  PUBLIC
+  PRIVATE
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum PostStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
