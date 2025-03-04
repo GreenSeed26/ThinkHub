@@ -62,7 +62,7 @@ export default function Post({ post }: PostProps) {
               ) : (
                 <div>
                   <Link
-                    href={`/user/${post.user.displayName}`}
+                    href={`/user/${post.user.username}`}
                     className="block font-medium hover:underline"
                   >
                     {post.user.displayName}

@@ -91,11 +91,7 @@ function SignUp() {
                 <FormMessage className="text-xs" />
               </div>
               <FormControl>
-                <PasswordInput
-                  placeholder="Password"
-                  type="password"
-                  {...field}
-                />
+                <PasswordInput {...field} />
               </FormControl>
             </FormItem>
           )}
