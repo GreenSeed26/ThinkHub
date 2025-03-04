@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/lib/db";
+import { prisma } from "@/lib/db";
 import { signUpSchema, SignUpValues } from "@/lib/validation";
 import { hash } from "bcrypt-ts";
 import { isRedirectError } from "next/dist/client/components/redirect-error";

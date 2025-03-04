@@ -1,5 +1,5 @@
 import { validateRequest } from "@/lib/auth";
-import prisma from "@/lib/db";
+import { prisma } from "@/lib/db";
 import { ApprovalInfo, getUserDataSelect } from "@/lib/types";
 
 interface AsyncParam {

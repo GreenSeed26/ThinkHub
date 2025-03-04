@@ -1,12 +1,9 @@
 import { compare } from "bcrypt-ts";
-import NextAuth, { Session, type DefaultSession } from "next-auth";
+import NextAuth, { type DefaultSession } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { JWT } from "next-auth/jwt";
-import prisma from "./db";
 import { loginSchema } from "./validation";
-import { Group } from "@prisma/client";
-import { getGroupDataInclude, UserData } from "./types";
+import { prisma } from "./db";
 
 declare module "next-auth" {
   interface Session {
@@ -16,12 +13,6 @@ declare module "next-auth" {
       username: string;
       banner: string;
     } & DefaultSession["user"];
-  }
-}
-
-declare module "next-auth/jwt" {
-  interface JWT {
-    id?: string;
   }
 }
 

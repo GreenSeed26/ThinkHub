@@ -1,4 +1,4 @@
-import prisma from "@/lib/db";
+import { prisma } from "@/lib/db";
 import React, { cache } from "react";
 import { validateRequest } from "@/lib/auth";
 import Editor from "@/components/groups/editor/Editor";

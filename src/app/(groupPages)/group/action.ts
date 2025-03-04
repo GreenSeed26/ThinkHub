@@ -1,7 +1,7 @@
 "use server";
 
 import { auth, validateRequest } from "@/lib/auth";
-import prisma from "@/lib/db";
+import { prisma } from "@/lib/db";
 import { createGroupSchema } from "@/lib/validation";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { redirect } from "next/navigation";

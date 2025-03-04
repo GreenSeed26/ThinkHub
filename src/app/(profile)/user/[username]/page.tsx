@@ -1,6 +1,6 @@
 import UserAvatar from "@/components/UserAvatar";
 import { validateRequest } from "@/lib/auth";
-import prisma from "@/lib/db";
+import { prisma } from "@/lib/db";
 import { FollowInfo, getUserDataSelect, UserData } from "@/lib/types";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";

@@ -1,7 +1,7 @@
 "use server";
 
 import { validateRequest } from "@/lib/auth";
-import prisma from "@/lib/db";
+import { prisma } from "@/lib/db";
 
 export async function sendJoinRequest(data: { groupId: string }) {
   try {

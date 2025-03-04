@@ -1,6 +1,6 @@
 import React, { cache } from "react";
 import SideBar from "../SideBar";
-import prisma from "@/lib/db";
+import { prisma } from "@/lib/db";
 import { getGroupDataInclude } from "@/lib/types";
 import { validateRequest } from "@/lib/auth";
 import Groups from "./Groups";

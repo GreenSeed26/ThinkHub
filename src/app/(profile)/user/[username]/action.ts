@@ -1,7 +1,7 @@
 "use server";
 
 import { validateRequest } from "@/lib/auth";
-import prisma from "@/lib/db";
+import { prisma } from "@/lib/db";
 import { getUserDataSelect } from "@/lib/types";
 import { updateProfileSchema, UpdateProfileValues } from "@/lib/validation";
 

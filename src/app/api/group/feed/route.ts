@@ -1,5 +1,5 @@
 import { validateRequest } from "@/lib/auth";
-import prisma from "@/lib/db";
+import { prisma } from "@/lib/db";
 import { getPostDataInclude, PostPage } from "@/lib/types";
 import { NextRequest } from "next/server";
 

@@ -1,5 +1,5 @@
 import { validateRequest } from "@/lib/auth";
-import prisma from "@/lib/db";
+import { prisma } from "@/lib/db";
 import { getUserDataSelect } from "@/lib/types";
 import Link from "next/link";
 import React from "react";
