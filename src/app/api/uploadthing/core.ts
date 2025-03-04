@@ -119,10 +119,7 @@ export const fileRouter = {
         await new UTApi().deleteFiles(key);
       }
 
-      const newGroupImageUrl = file.url.replace(
-        "/f/",
-        `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`,
-      );
+      const newGroupImageUrl = file.url;
 
       await prisma.group.update({
         where: {

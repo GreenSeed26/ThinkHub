@@ -43,7 +43,7 @@ export default function Editor({ user }: { user: UserData | undefined }) {
     onDrop: startUpload,
   });
 
-  const { ...rootProps } = getRootProps();
+  const { onClick, ...rootProps } = getRootProps();
 
   const input = editor?.getText({ blockSeparator: "\n" }) || "";
   function onSubmit() {
