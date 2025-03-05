@@ -47,3 +47,7 @@ export const updateGroupProfileSchema = z.object({
   description: z.string().max(101, "maximum of 101 characters exceeded"),
 });
 export type UpdateGroupProfileValues = z.infer<typeof updateGroupProfileSchema>;
+
+export const createCommentSchema = z.object({
+  content: requiredString,
+});

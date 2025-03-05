@@ -5,12 +5,12 @@ import { cn, relativeDateFormat } from "@/lib/utils";
 import { Separator } from "@radix-ui/react-separator";
 import LikeButton from "./LikeButton";
 import { useSession } from "next-auth/react";
-import { MessageCircle } from "lucide-react";
 import BookmarkButton from "./BookmarkButton";
 import Link from "next/link";
 import GroupAvatar from "../groups/GroupAvatar";
 import Image from "next/image";
 import { Media } from "@prisma/client";
+import CommentButton from "./comments/CommentButton";
 
 interface PostProps {
   post: PostData;
@@ -96,7 +96,7 @@ export default function Post({ post }: PostProps) {
             ),
           }}
         />
-        <MessageCircle />
+        <CommentButton post={post} />
         <BookmarkButton
           initialState={{
             isBookmarkedByUser: post.bookmark.some(
