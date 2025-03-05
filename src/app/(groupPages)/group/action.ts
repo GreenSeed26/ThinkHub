@@ -16,14 +16,13 @@ export async function createGroup(input: {
 
     if (!user) throw new Error("Unauthorized");
 
-    const { description, privacy, name, requiresApproval } =
-      createGroupSchema.parse(input);
+    const { description, privacy, name } = createGroupSchema.parse(input);
 
     const group = await prisma.group.create({
       data: {
         name,
         description,
-        requiresApproval,
+        requiresApproval: false,
         privacy,
         members: {
           create: {

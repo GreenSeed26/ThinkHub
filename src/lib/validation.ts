@@ -37,7 +37,6 @@ export type UpdateProfileValues = z.infer<typeof updateProfileSchema>;
 export const createGroupSchema = z.object({
   name: requiredString,
   description: requiredString,
-  requiresApproval: z.boolean(),
   privacy: z.enum(["PUBLIC", "PRIVATE"]),
 });
 
