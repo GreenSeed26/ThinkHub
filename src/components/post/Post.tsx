@@ -11,6 +11,7 @@ import GroupAvatar from "../groups/GroupAvatar";
 import Image from "next/image";
 import { Media } from "@prisma/client";
 import CommentButton from "./comments/CommentButton";
+import Linkify from "../Linkify";
 
 interface PostProps {
   post: PostData;
@@ -81,7 +82,9 @@ export default function Post({ post }: PostProps) {
           </div>
         </div>
       </div>
-      <div className="whitespace-pre-wrap">{post.content}</div>
+      <Linkify>
+        <div className="whitespace-pre-wrap">{post.content}</div>
+      </Linkify>
       {!!post.attachments.length && (
         <MediaPreviews attachments={post.attachments} />
       )}

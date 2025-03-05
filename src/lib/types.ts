@@ -98,6 +98,25 @@ export function getGroupDataInclude(loggedInUserId: string) {
   } satisfies Prisma.GroupInclude;
 }
 
+export const notificationsInclude = {
+  issuer: {
+    select: {
+      username: true,
+      displayName: true,
+      image: true,
+    },
+  },
+  post: {
+    select: {
+      content: true,
+    },
+  },
+} satisfies Prisma.NotificationInclude;
+
+export type NotificationData = Prisma.NotificationGetPayload<{
+  include: typeof notificationsInclude;
+}>;
+
 export function getJoinRequestDataSelect(loggedInUserId: string) {
   return {
     id: true,
@@ -144,6 +163,15 @@ export type CommentsPage = {
 export type BookmarkInfo = {
   isBookmarkedByUser: boolean;
 };
+
+export interface NotificationsPage {
+  notifications: NotificationData[];
+  nextCursor: string | null;
+}
+
+export interface NotificationCountInfo {
+  unreadCount: number;
+}
 
 export type DiscoverGroupPage = {
   groups: GroupData[];

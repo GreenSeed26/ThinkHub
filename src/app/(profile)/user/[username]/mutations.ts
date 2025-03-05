@@ -38,7 +38,7 @@ export function useUpdateProfileMutation() {
       ]);
     },
     onSuccess: async ([updatedUser, avatarResult]) => {
-      const newAvatarUrl = avatarResult?.[0].serverData.image;
+      const newAvatarUrl = avatarResult?.[0].ufsUrl;
 
       const queryFilter = {
         queryKey: ["post-feed", "group-feed"],

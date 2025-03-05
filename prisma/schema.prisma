@@ -21,17 +21,19 @@ model User {
   accounts      Account[]
   sessions      Session[]
 
-  posts       Post[]
-  likes       Like[]
-  joinRequest JoinRequest[]
-  followers   Follow[]      @relation("Followers")
-  following   Follow[]      @relation("Following")
-  bookmark    Bookmark[]
-  group       GroupMember[]
+  posts                 Post[]
+  likes                 Like[]
+  joinRequest           JoinRequest[]
+  followers             Follow[]       @relation("Followers")
+  following             Follow[]       @relation("Following")
+  bookmark              Bookmark[]
+  group                 GroupMember[]
+  comment               Comment[]
+  receivedNotifications Notification[] @relation("Recipient")
+  issuedNotifications   Notification[] @relation("Issuer")
 
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  Comment   Comment[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("users")
 }
@@ -76,16 +78,17 @@ model VerificationToken {
 }
 
 model Post {
-  id          String     @id @default(cuid())
-  content     String
-  userId      String
-  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  likes       Like[]
-  bookmark    Bookmark[]
-  attachments Media[]
-  groupId     String?
-  group       Group?     @relation(fields: [groupId], references: [id])
-  comments    Comment[]
+  id                  String         @id @default(cuid())
+  content             String
+  userId              String
+  user                User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  likes               Like[]
+  bookmark            Bookmark[]
+  attachments         Media[]
+  groupId             String?
+  group               Group?         @relation(fields: [groupId], references: [id])
+  comments            Comment[]
+  linkedNotifications Notification[]
 
   createdAt DateTime @default(now())
 
@@ -220,4 +223,26 @@ enum PostStatus {
   PENDING
   APPROVED
   REJECTED
+}
+
+model Notification {
+  id          String           @id @default(cuid())
+  recipientId String
+  recipient   User             @relation("Recipient", fields: [recipientId], references: [id], onDelete: Cascade)
+  issuerId    String
+  issuer      User             @relation("Issuer", fields: [issuerId], references: [id], onDelete: Cascade)
+  postId      String?
+  post        Post?            @relation(fields: [postId], references: [id], onDelete: Cascade)
+  type        NotificationType
+  read        Boolean          @default(false)
+
+  createdAt DateTime @default(now())
+
+  @@map("notifications")
+}
+
+enum NotificationType {
+  LIKE
+  FOLLOW
+  COMMENT
 }
