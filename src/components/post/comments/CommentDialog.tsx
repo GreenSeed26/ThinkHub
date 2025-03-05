@@ -15,6 +15,7 @@ import UserAvatar from "@/components/UserAvatar";
 import { relativeDateFormat } from "@/lib/utils";
 import InfiniteScrollContainer from "@/components/InfiniteScrollContainer";
 import { Loader2 } from "lucide-react";
+import Linkify from "@/components/Linkify";
 interface CommentDialogProps {
   post: PostData;
   open: boolean;
@@ -105,7 +106,11 @@ function Comment({ comment }: { comment: CommentData }) {
           </span>
         </div>
 
-        <div className="whitespace-pre-wrap break-words">{comment.content}</div>
+        <Linkify>
+          <div className="whitespace-pre-wrap break-words">
+            {comment.content}
+          </div>
+        </Linkify>
       </div>
     </div>
   );
