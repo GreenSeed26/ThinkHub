@@ -82,6 +82,7 @@ function Comments({ post }: { post: PostData }) {
       {comments.map((comment) => (
         <Comment key={comment.id} comment={comment} />
       ))}
+      {isFetching && <Loader2 className="animate-spin" />}
     </InfiniteScrollContainer>
   );
 }
@@ -94,7 +95,7 @@ function Comment({ comment }: { comment: CommentData }) {
       <div className="flex w-full flex-col">
         <div className="flex items-center gap-1 text-sm">
           <Link
-            href={`/users/${comment.user.username}`}
+            href={`/users/${comment.user.displayName}`}
             className="font-medium hover:underline"
           >
             {comment.user.displayName}
@@ -104,7 +105,7 @@ function Comment({ comment }: { comment: CommentData }) {
           </span>
         </div>
 
-        <div className="break-words">{comment.content}</div>
+        <div className="whitespace-pre-wrap break-words">{comment.content}</div>
       </div>
     </div>
   );

@@ -68,14 +68,14 @@ export default function Editor({ user }: { user: UserData | undefined }) {
     startUpload(files);
   }
   return (
-    <div className="flex flex-col gap-5 bg-card p-5 shadow-sm sm:rounded-2xl">
+    <div className="flex flex-col gap-5 border bg-card p-5 shadow-sm sm:rounded-2xl">
       <div className="flex gap-5">
         <UserAvatar avatarUrl={user?.image} />
         <div className="w-full" {...rootProps}>
           <EditorContent
             editor={editor}
             className={cn(
-              "max-h-[20rem] w-full overflow-y-auto rounded-2xl bg-background px-5 py-3",
+              "max-h-[20rem] w-full overflow-y-auto rounded-2xl bg-background/40 px-5 py-3",
               isDragActive && "outline-dashed",
             )}
             onPaste={onPaste}

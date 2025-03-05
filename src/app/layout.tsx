@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Overpass } from "next/font/google";
+import { Inter, JetBrains_Mono, Overpass } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import ReactQueryProvider from "./ReactQueryProvider";
@@ -10,6 +10,11 @@ import { fileRouter } from "./api/uploadthing/core";
 
 const jetBrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -31,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${jetBrainsMono.variable} ${overpass.variable} antialiased`}
+        className={`${jetBrainsMono.variable} ${overpass.variable} ${inter.variable} antialiased`}
       >
         <NextSSRPlugin routerConfig={extractRouterConfig(fileRouter)} />
         <ThemeProvider
