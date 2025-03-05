@@ -3,6 +3,7 @@ import UserButton from "@/components/UserButton";
 import { validateRequest } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { getUserDataSelect } from "@/lib/types";
+import Image from "next/image";
 import Link from "next/link";
 import React, { cache } from "react";
 
@@ -28,7 +29,7 @@ export default async function Navbar() {
     <header className="sticky top-0 z-10 border-b bg-card shadow-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-5 py-3 sm:flex-wrap sm:gap-5">
         <Link href="/" className="text-2xl font-bold text-primary">
-          MIS
+          TH
         </Link>
         <SearchInput />
         <UserButton user={userInfo} className="sm:ms-auto" />
