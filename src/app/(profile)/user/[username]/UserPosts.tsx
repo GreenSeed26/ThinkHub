@@ -1,6 +1,7 @@
 "use client";
 import InfiniteScrollContainer from "@/components/InfiniteScrollContainer";
 import Post from "@/components/post/Post";
+import PostsLoadingSkeleton from "@/components/PostLoadingSkeleton";
 import kyInstance from "@/lib/ky";
 import { PostPage } from "@/lib/types";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -33,7 +34,7 @@ export default function UserPosts({ userId }: UserPostProps) {
   });
   const posts = data?.pages.flatMap((page) => page.posts) || [];
 
-  if (status === "pending") return <div>Loading...</div>;
+  if (status === "pending") return <PostsLoadingSkeleton />;
 
   if (status === "success" && !posts.length && !hasNextPage) {
     return (

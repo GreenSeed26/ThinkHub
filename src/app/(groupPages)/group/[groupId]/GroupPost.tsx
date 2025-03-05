@@ -6,6 +6,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import InfiniteScrollContainer from "@/components/InfiniteScrollContainer";
 import Post from "@/components/post/Post";
+import PostsLoadingSkeleton from "@/components/PostLoadingSkeleton";
 
 export default function GroupPost({ groupId }: { groupId: string }) {
   const { data, status, hasNextPage, isFetching, fetchNextPage } =
@@ -25,7 +26,7 @@ export default function GroupPost({ groupId }: { groupId: string }) {
   const posts = data?.pages.flatMap((page) => page.posts) || [];
 
   if (status === "pending") {
-    return <Loader2 className="animate-spin" />;
+    return <PostsLoadingSkeleton />;
   }
   if (status === "success" && !posts.length && !hasNextPage) {
     return (
