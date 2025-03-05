@@ -29,10 +29,7 @@ export const fileRouter = {
         await new UTApi().deleteFiles(key);
       }
 
-      const newAvatarUrl = file.url.replace(
-        "/f/",
-        `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`,
-      );
+      const newAvatarUrl = file.ufsUrl;
 
       await prisma.user.update({
         where: { id: metadata.user.id },
@@ -66,10 +63,7 @@ export const fileRouter = {
         await new UTApi().deleteFiles(key);
       }
 
-      const newBannerUrl = file.url.replace(
-        "/f/",
-        `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`,
-      );
+      const newBannerUrl = file.ufsUrl;
 
       await prisma.user.update({
         where: { id: metadata.user.id },
@@ -119,7 +113,7 @@ export const fileRouter = {
         await new UTApi().deleteFiles(key);
       }
 
-      const newGroupImageUrl = file.url;
+      const newGroupImageUrl = file.ufsUrl;
 
       await prisma.group.update({
         where: {
@@ -144,10 +138,7 @@ export const fileRouter = {
     .onUploadComplete(async ({ file }) => {
       const media = await prisma.media.create({
         data: {
-          url: file.url.replace(
-            "/f/",
-            `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`,
-          ),
+          url: file.ufsUrl,
           type: file.type.startsWith("image") ? "IMAGE" : "VIDEO",
         },
       });
