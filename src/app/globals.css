@@ -75,7 +75,7 @@ code {
     @apply bg-background text-foreground;
   }
 
-  .reaction-btn {
-    transition: top .3 ease, opacity .3 ease;
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
   }
 }

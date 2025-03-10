@@ -46,7 +46,7 @@ export function getPostDataInclude(loggedInUserId: string) {
       },
       select: {
         userId: true,
-        reaction: true
+        reaction: true,
       },
     },
     attachments: true,
@@ -65,6 +65,14 @@ export function getPostDataInclude(loggedInUserId: string) {
       },
     },
   } satisfies Prisma.PostInclude;
+}
+
+export function getStoryDataInclude(loggedInUserId: string) {
+  return {
+    user: {
+      select: getUserDataSelect(loggedInUserId),
+    },
+  } satisfies Prisma.StoryInclude;
 }
 
 export function getCommentDataInclude(loggedInUserId: string) {
@@ -154,8 +162,8 @@ export type FollowInfo = {
 export type LikeInfo = {
   likes: number;
   isLikedByUser: boolean;
-  reaction: $Enums.ReactionType | null
-  reactions: Record<$Enums.ReactionType, number>
+  reaction: $Enums.ReactionType | null;
+  reactions: Record<$Enums.ReactionType, number>;
 };
 
 export type CommentsPage = {

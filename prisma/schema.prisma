@@ -22,6 +22,7 @@ model User {
   sessions      Session[]
 
   posts                 Post[]
+  story                 Story[]
   likes                 Like[]
   joinRequest           JoinRequest[]
   followers             Follow[]       @relation("Followers")
@@ -93,6 +94,17 @@ model Post {
   createdAt DateTime @default(now())
 
   @@map("posts")
+}
+
+model Story {
+  id      String @id @default(cuid())
+  content String
+  userId  String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@map("stories")
 }
 
 model Comment {
