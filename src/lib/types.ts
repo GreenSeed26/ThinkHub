@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { $Enums, Prisma } from "@prisma/client";
 
 export function getUserDataSelect(loggedInUserId: string) {
   return {
@@ -46,6 +46,7 @@ export function getPostDataInclude(loggedInUserId: string) {
       },
       select: {
         userId: true,
+        reaction: true
       },
     },
     attachments: true,
@@ -153,6 +154,8 @@ export type FollowInfo = {
 export type LikeInfo = {
   likes: number;
   isLikedByUser: boolean;
+  reaction: $Enums.ReactionType | null
+  reactions: Record<$Enums.ReactionType, number>
 };
 
 export type CommentsPage = {

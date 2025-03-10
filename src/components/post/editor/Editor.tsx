@@ -75,7 +75,7 @@ export default function Editor({ user }: { user: UserData | undefined }) {
           <EditorContent
             editor={editor}
             className={cn(
-              "max-h-[20rem] w-full overflow-y-auto rounded-2xl bg-background/40 px-5 py-3",
+              "max-h-[20rem] w-full overflow-y-auto rounded-2xl bg-background px-5 py-3",
               isDragActive && "outline-dashed",
             )}
             onPaste={onPaste}

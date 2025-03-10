@@ -132,13 +132,22 @@ model Follow {
 }
 
 model Like {
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  postId String
-  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId   String
+  user     User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  postId   String
+  post     Post         @relation(fields: [postId], references: [id], onDelete: Cascade)
+  reaction ReactionType @default(LIKE)
 
   @@unique([userId, postId])
   @@map("likes")
+}
+
+enum ReactionType {
+  LIKE
+  HAHA
+  ANGRY
+  SAD
+  WOW
 }
 
 model Media {

@@ -2,6 +2,14 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  experimental: {
+    serverActions: {
+      allowedOrigins: [
+        "localhost:3000",
+        "verbose-funicular-x55qj5j7jqvjhg4w-3000.app.github.dev",
+      ],
+    },
+  },
   images: {
     remotePatterns: [
       {

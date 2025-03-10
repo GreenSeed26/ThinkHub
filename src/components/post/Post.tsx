@@ -1,15 +1,15 @@
 "use client";
+import ReactButton from "./ReactButton";
 import { PostData } from "@/lib/types";
 import UserAvatar from "../UserAvatar";
 import { cn, relativeDateFormat } from "@/lib/utils";
 import { Separator } from "@radix-ui/react-separator";
-import LikeButton from "./LikeButton";
 import { useSession } from "next-auth/react";
 import BookmarkButton from "./BookmarkButton";
 import Link from "next/link";
 import GroupAvatar from "../groups/GroupAvatar";
 import Image from "next/image";
-import { Media } from "@prisma/client";
+import { $Enums, Media } from "@prisma/client";
 import CommentButton from "./comments/CommentButton";
 import Linkify from "../Linkify";
 
@@ -90,12 +90,22 @@ export default function Post({ post }: PostProps) {
       )}
       <Separator />
       <div className="flex justify-around">
-        <LikeButton
+        <ReactButton
           postId={post.id}
           initialState={{
             likes: post._count.likes,
             isLikedByUser: post.likes.some(
               (like) => like.userId === data?.user.id,
+            ),
+            reaction:
+              post.likes.find((like) => like.userId === data?.user.id)
+                ?.reaction || null,
+            reactions: post.likes.reduce(
+              (acc, like) => {
+                acc[like.reaction] = (acc[like.reaction] || 0) + 1;
+                return acc;
+              },
+              {} as Record<$Enums.ReactionType, number>,
             ),
           }}
         />
