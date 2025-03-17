@@ -27,6 +27,12 @@ export const postSchema = z.object({
 
 export type PostValues = z.infer<typeof postSchema>;
 
+export const storySchema = z.object({
+  mediaIds: z.array(z.string()).max(5, "Cannot have more than 5 attachments"),
+});
+
+export type StoryValues = z.infer<typeof storySchema>;
+
 export const updateProfileSchema = z.object({
   displayName: z.string(),
   bio: z.string().max(101, "maximum of 101 characters exceeded"),

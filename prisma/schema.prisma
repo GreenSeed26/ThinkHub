@@ -97,14 +97,26 @@ model Post {
 }
 
 model Story {
-  id      String @id @default(cuid())
-  content String
-  userId  String
-  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id     String       @id @default(cuid())
+  userId String
+  user   User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  media  StoryMedia[]
 
   createdAt DateTime @default(now())
 
   @@map("stories")
+}
+
+model StoryMedia {
+  id       String    @id @default(cuid())
+  storyId  String?
+  story    Story?    @relation(fields: [storyId], references: [id], onDelete: Cascade)
+  type     MediaType
+  mediaUrl String
+
+  createdAt DateTime @default(now())
+
+  @@map("story_media")
 }
 
 model Comment {

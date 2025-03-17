@@ -12,7 +12,7 @@ export default async function Home() {
   const userData = await getUser(user.id);
   return (
     <main className="flex w-full min-w-0 justify-between gap-5">
-      <div className="mx-auto w-full max-w-2xl space-y-5">
+      <div className="mx-auto w-full max-w-2xl space-y-3">
         <Editor user={userData} />
         <Stories user={userData} />
         <PostFeed />

@@ -145,6 +145,27 @@ export const fileRouter = {
 
       return { mediaId: media.id };
     }),
+  story: f({
+    image: { maxFileSize: "4MB", maxFileCount: 5 },
+    video: { maxFileSize: "64MB", maxFileCount: 5 },
+  })
+    .middleware(async () => {
+      const { user } = await validateRequest();
+
+      if (!user) throw new UploadThingError("Unauthorized");
+
+      return {};
+    })
+    .onUploadComplete(async ({ file }) => {
+      const media = await prisma.storyMedia.create({
+        data: {
+          mediaUrl: file.ufsUrl,
+          type: file.type.startsWith("image") ? "IMAGE" : "VIDEO",
+        },
+      });
+
+      return { mediaId: media.id };
+    }),
 } satisfies FileRouter;
 
 export type AppFileRouter = typeof fileRouter;

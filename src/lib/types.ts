@@ -72,8 +72,19 @@ export function getStoryDataInclude(loggedInUserId: string) {
     user: {
       select: getUserDataSelect(loggedInUserId),
     },
+    media: {
+      where: {
+        createdAt: {
+          gte: new Date(Date.now() - 24 * 60 * 60 * 1000),
+        },
+      },
+    },
   } satisfies Prisma.StoryInclude;
 }
+
+export type StoryData = Prisma.StoryGetPayload<{
+  include: ReturnType<typeof getStoryDataInclude>;
+}>;
 
 export function getCommentDataInclude(loggedInUserId: string) {
   return {
@@ -151,6 +162,10 @@ export type PostData = Prisma.PostGetPayload<{
 
 export type PostPage = {
   posts: PostData[];
+  nextCursor: string | null;
+};
+export type StoryPage = {
+  stories: StoryData[];
   nextCursor: string | null;
 };
 
