@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { Fragment } from "react";
 import UserAvatar from "../UserAvatar";
 import avatarPlaceholder from "@/assests/user-icon.jpg";
 
@@ -36,6 +36,7 @@ export default function Stories({ user }: { user: UserData | undefined }) {
 
   const stories = data?.pages.flatMap((page) => page.stories) || [];
   console.log(stories);
+
   return (
     <InfiniteScrollContainer
       onBottomReached={() => hasNextPage && !isFetching && fetchNextPage()}
@@ -61,33 +62,33 @@ export default function Stories({ user }: { user: UserData | undefined }) {
           </div>
         </Link>
         {stories.map((story) => (
-          <Link
-            href={`/story/${story.id}`}
-            key={story.id}
-            className="aspect-[9/16] h-52"
-          >
-            <div className="relative size-full rounded-2xl shadow-md">
-              <Image
-                src={story.media[0].mediaUrl}
-                width={200}
-                height={200}
-                alt={`${user?.displayName}'s Profile`}
-                className="h-full rounded-2xl border object-cover"
-              />
-              <div className="absolute left-0 top-0 flex size-full flex-col justify-between rounded-2xl px-3 py-2 transition-colors hover:bg-card/10">
-                <UserAvatar
-                  avatarUrl={story.user.image}
-                  size={40}
-                  className="ring-2 ring-primary"
-                />
-              </div>
-              <div className="absolute bottom-0 h-10 w-full rounded-b-2xl bg-gradient-to-t from-black/90 to-white/0 p-2">
-                <span className="text-sm font-medium text-white">
-                  {story.user.displayName}
-                </span>
-              </div>
-            </div>
-          </Link>
+          <Fragment key={story.id}>
+            {story.media.length !== 0 && (
+              <Link href={`/story/${story.id}`} className="aspect-[9/16] h-52">
+                <div className="relative size-full rounded-2xl shadow-md">
+                  <Image
+                    src={story.media[0].mediaUrl}
+                    width={200}
+                    height={200}
+                    alt={`${user?.displayName}'s Profile`}
+                    className="h-full rounded-2xl border object-cover"
+                  />
+                  <div className="absolute left-0 top-0 flex size-full flex-col justify-between rounded-2xl px-3 py-2 transition-colors hover:bg-card/10">
+                    <UserAvatar
+                      avatarUrl={story.user.image}
+                      size={40}
+                      className="ring-2 ring-primary"
+                    />
+                  </div>
+                  <div className="absolute bottom-0 h-10 w-full rounded-b-2xl bg-gradient-to-t from-black/90 to-white/0 p-2">
+                    <span className="text-sm font-medium text-white">
+                      {story.user.displayName}
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            )}
+          </Fragment>
         ))}
         {status === "pending" && <StorySkeleton />}
       </div>

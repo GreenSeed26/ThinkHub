@@ -4,7 +4,15 @@ import { Canvas, Rect, Textbox } from "fabric";
 import { v4 as uuidV4 } from "uuid";
 import NextImage from "next/image";
 import { Button } from "@/components/ui/button";
-import { Loader2, Save, Send, Square, TypeIcon, X } from "lucide-react";
+import {
+  Loader2,
+  Save,
+  Send,
+  SendHorizontal,
+  Square,
+  TypeIcon,
+  X,
+} from "lucide-react";
 import ImageButton from "./ImageButton";
 import { Attachment, useStoryMediaUpload } from "../useStoryMediaUpload";
 import { cn } from "@/lib/utils";
@@ -84,6 +92,12 @@ export default function FabricJS() {
     canvas.discardActiveObject();
     canvas.renderAll();
 
+    console.log(canvas.getObjects().find((obj) => obj.get("id")));
+
+    if (attachments.length > 0) {
+      attachments.map((a) => removeAttachment(a.file.name));
+    }
+
     canvasRef.current?.toBlob((b) => {
       const storyFile = b
         ? new File([b], `story_${uuidV4()}.webp`, {
@@ -134,20 +148,38 @@ export default function FabricJS() {
         </LoadingButton>
       </div>
       <div className="absolute bottom-0 top-0 flex w-full">
-        <div className="hidden h-full max-w-96 grow rounded-2xl bg-card p-2 sm:block">
+        <div className="hidden h-full max-w-96 grow space-y-3 rounded-2xl bg-card p-2 sm:block">
           <h1>Edit Story</h1>
 
-          <div className="flex w-full justify-around">
-            <Button onClick={addRectangle} variant="secondary">
+          <div className="flex w-full flex-col items-center justify-around gap-2 md:flex-row">
+            <Button
+              className="w-fit"
+              onClick={addRectangle}
+              variant="secondary"
+            >
               <Square />
             </Button>
-            <Button onClick={addText} variant="secondary">
+            <Button className="w-fit" onClick={addText} variant="secondary">
               <TypeIcon />
             </Button>
-            <ImageButton canvas={canvas} />
+            <ImageButton className="w-fit" canvas={canvas} />
           </div>
-          <Button onClick={getImageCanvas}>Show Preview</Button>
-          <div>
+          <div className="flex justify-center gap-2">
+            <Button className="" onClick={getImageCanvas}>
+              <Save />
+              <span className="hidden md:inline-block">Show Preview</span>
+            </Button>
+            <LoadingButton
+              onClick={onSubmit}
+              loading={mutation.isPending}
+              disabled={attachments.length === 0 || isUploading}
+              className="w-fit"
+            >
+              <SendHorizontal />
+              <span className="hidden md:inline-block">Post</span>
+            </LoadingButton>
+          </div>
+          <div className="relative">
             {isUploading && (
               <div className="absolute z-30 flex h-full w-full items-center justify-center gap-3 p-3">
                 <span className="text-sm">{uploadProgress ?? 0}%</span>
@@ -160,14 +192,6 @@ export default function FabricJS() {
                 removeAttachment={removeAttachment}
               />
             )}
-            <LoadingButton
-              onClick={onSubmit}
-              loading={mutation.isPending}
-              disabled={attachments.length === 0 || isUploading}
-              className="mt-2 w-full"
-            >
-              Post
-            </LoadingButton>
           </div>
         </div>
         <div className="flex flex-grow items-center justify-center">

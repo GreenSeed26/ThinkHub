@@ -1,12 +1,14 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Canvas, FabricImage } from "fabric";
 import { ImageIcon } from "lucide-react";
 import React, { ChangeEvent, useRef, useState } from "react";
 interface ImageButtonProps {
   canvas: Canvas | null;
+  className?: string;
 }
-export default function ImageButton({ canvas }: ImageButtonProps) {
+export default function ImageButton({ canvas, className }: ImageButtonProps) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -49,7 +51,7 @@ export default function ImageButton({ canvas }: ImageButtonProps) {
     };
   };
   return (
-    <div>
+    <div className={cn(className)}>
       <input
         type="file"
         ref={fileInputRef}
